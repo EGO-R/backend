@@ -1,0 +1,113 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.25'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.25'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'nu.studer.jooq' version '9.0'
+}
+
+group = 'org.mirea'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // db
+//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    runtimeOnly 'org.postgresql:postgresql'
+    jooqGenerator 'org.postgresql:postgresql'
+    jooqGenerator 'org.jooq:jooq'
+    jooqGenerator 'org.jooq:jooq-meta'
+    jooqGenerator 'org.jooq:jooq-codegen'
+    implementation 'org.liquibase:liquibase-core'
+
+    // s3
+//    implementation("software.amazon.awssdk:aws-sdk-java:2.29.33")
+//    implementation("software.amazon.awssdk:apache-client:2.29.33")
+//
+//    // web
+//    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // kotlin
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
+
+    // tests
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+//    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:testcontainers'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:3.2.4'
+    }
+    dependencies {
+        dependency 'org.jooq:jooq-codegen:3.19.8'
+        dependency 'org.jooq:jooq-meta:3.19.8'
+        dependency 'org.jooq:jooq:3.19.8'
+    }
+}
+
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll '-Xjsr305=strict'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jooq {
+    version = '3.19.8'
+    configurations {
+        main {
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.INFO
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5432/alexandrina_rksp'
+                    user = 'postgres'
+                    password = 'Egor2004'
+                }
+                generator {
+                    name = 'org.jooq.codegen.JavaGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                        includes = '.*'
+                        excludes = ''
+                    }
+                    generate {
+                        pojos = false
+                        daos = false
+                        springAnnotations = true
+                    }
+                    target {
+                        packageName = 'org.mirea.backend.jooq.generated'
+                        directory = 'src/main/java'
+                    }
+                }
+            }
+        }
+    }
+}

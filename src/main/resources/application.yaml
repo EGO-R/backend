@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: ${PG_URL}
+    password: ${PG_PASSWORD}
+    username: ${PG_USERNAME}
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: postgres
+logging:
+  level:
+    root: info
+s3:
+  key-id: ${S3_KEY_ID}
+  secret-key: ${S3_SECRET_KEY}
+  region: ${S3_REGION:ru-central1}
+  endpoint: ${S3_ENDPOINT:https://storage.yandexcloud.net}
