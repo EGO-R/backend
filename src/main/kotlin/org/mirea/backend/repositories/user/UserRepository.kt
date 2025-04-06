@@ -5,7 +5,6 @@ import kotlinx.coroutines.withContext
 import org.jooq.DSLContext
 import org.mirea.backend.entities.UserEntity
 import org.mirea.backend.jooq.generated.Tables.CLIENTS
-import org.mirea.backend.jooq.generated.tables.Clients
 import org.mirea.backend.utils.ids.UserID
 import org.springframework.stereotype.Repository
 
@@ -15,9 +14,17 @@ class UserRepository(
 ) {
     suspend fun getById(id: UserID) = withContext(Dispatchers.IO) {
         DSL
-            .selectFrom(Clients.CLIENTS)
+            .selectFrom(CLIENTS)
             .where(CLIENTS.ID.eq(id.value))
             .fetchOne()
-            ?.into(UserEntity::class.java)!!
+            ?.into(UserEntity::class.java)
+    }
+
+    suspend fun search(query: UserRepositorySearchQuery): List<UserEntity> = withContext(Dispatchers.IO) {
+        DSL
+            .selectFrom(CLIENTS)
+            .where(query.toCondition())
+            .fetch()
+            .into(UserEntity::class.java)
     }
 }

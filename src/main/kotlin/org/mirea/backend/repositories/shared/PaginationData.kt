@@ -10,7 +10,7 @@ interface PaginationData<R : Record, T> {
 
     val direction: SortDirection
 
-    val lastSelectedValue: T
+    val lastSelectedValue: T?
 
     fun getSorted() = when(direction) {
         SortDirection.ASC -> field.asc()

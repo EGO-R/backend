@@ -7,4 +7,5 @@ data class VideoEntity(
     val id: VideoID,
     val name: String,
     val userId: UserID,
+    val preview: String,
 )

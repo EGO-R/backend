@@ -59,6 +59,20 @@ public class VideoRecord extends UpdatableRecordImpl<VideoRecord> {
         return (Integer) get(2);
     }
 
+    /**
+     * Setter for <code>public.video.preview</code>.
+     */
+    public void setPreview(String value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>public.video.preview</code>.
+     */
+    public String getPreview() {
+        return (String) get(3);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -82,12 +96,13 @@ public class VideoRecord extends UpdatableRecordImpl<VideoRecord> {
     /**
      * Create a detached, initialised VideoRecord
      */
-    public VideoRecord(Long id, String name, Integer userId) {
+    public VideoRecord(Long id, String name, Integer userId, String preview) {
         super(Video.VIDEO);
 
         setId(id);
         setName(name);
         setUserId(userId);
+        setPreview(preview);
         resetChangedOnNotNull();
     }
 }

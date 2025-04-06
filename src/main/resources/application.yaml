@@ -8,6 +8,13 @@ spring:
     driver-class-name: org.postgresql.Driver
   jooq:
     sql-dialect: postgres
+  servlet:
+    multipart:
+      max-file-size: ${MAX_SIZE:5GB}
+      max-request-size: ${MAX_SIZE:5GB}
+  mvc:
+    async:
+      request-timeout: 5m
 logging:
   level:
     root: info
@@ -16,3 +23,5 @@ s3:
   secret-key: ${S3_SECRET_KEY}
   region: ${S3_REGION:ru-central1}
   endpoint: ${S3_ENDPOINT:https://storage.yandexcloud.net}
+  bucket: ${S3_BUCKET}
+  temp-bucket: ${S3_TEMP_BUCKET}

@@ -71,6 +71,11 @@ public class Video extends TableImpl<VideoRecord> {
      */
     public final TableField<VideoRecord, Integer> USER_ID = createField(DSL.name("user_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
+    /**
+     * The column <code>public.video.preview</code>.
+     */
+    public final TableField<VideoRecord, String> PREVIEW = createField(DSL.name("preview"), SQLDataType.VARCHAR(256).nullable(false).defaultValue(DSL.field(DSL.raw("''::character varying"), SQLDataType.VARCHAR)), this, "");
+
     private Video(Name alias, Table<VideoRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }

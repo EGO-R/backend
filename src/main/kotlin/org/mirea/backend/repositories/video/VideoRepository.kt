@@ -7,6 +7,7 @@ import org.mirea.backend.entities.VideoEntity
 import org.mirea.backend.jooq.generated.Tables.VIDEO
 import org.mirea.backend.repositories.video.queries.VideoRepositorySearchQuery
 import org.mirea.backend.utils.ids.VideoID
+import org.mirea.backend.utils.repositories.paginated
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -26,7 +27,7 @@ class VideoRepository(
 
     suspend fun getById(id: VideoID) = search(VideoRepositorySearchQuery.create {
         this.id = id
-    }).first()
+    }).firstOrNull()
 
     suspend fun upsert(entity: VideoEntity) = withContext(Dispatchers.IO) {
         DSL

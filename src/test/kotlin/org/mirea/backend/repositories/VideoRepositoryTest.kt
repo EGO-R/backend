@@ -49,10 +49,9 @@ class VideoRepositoryTest : RepositoryTest() {
 
         @Test
         fun pagination() {
-            val paginationData = VideoIdPaginationData(
-                lastSelectedID = VideoID(1),
+            val paginationData = VideoIdPaginationData.create(lastSelectedID = VideoID(1)) {
                 size = 2
-            )
+            }
 
             val query = VideoRepositorySearchQuery.create {
                 this.paginationData = paginationData

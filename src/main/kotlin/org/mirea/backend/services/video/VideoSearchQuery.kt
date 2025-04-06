@@ -1,24 +1,18 @@
 package org.mirea.backend.services.video
 
 import org.mirea.backend.dto.VideoPaginationOptions
+import org.mirea.backend.repositories.video.queries.VideoRepositorySearchQuery
+import org.mirea.backend.utils.ids.UserID
+import org.mirea.backend.utils.ids.VideoID
 
-data class VideoSearchQuery internal constructor(
-    val name: String?,
-    val authorID: Int?,
-    val paginationOptions: VideoPaginationOptions,
+data class VideoSearchQuery(
+    val name: String? = null,
+    val authorID: Int? = null,
+    val paginationOptions: VideoPaginationOptions = VideoPaginationOptions(),
 ) {
-    companion object {
-        fun create(cb: VideoSearchQueryBuilder.() -> Unit) =
-            VideoSearchQueryBuilder().apply(cb).build()
-
-        class VideoSearchQueryBuilder {
-            var name: String? = null
-            var authorID: Int? = null
-
-            fun build() = VideoSearchQuery(
-                name = name,
-                authorID = authorID,
-            )
-        }
+    fun toRepositoryQuery() = VideoRepositorySearchQuery.create {
+        name = this@VideoSearchQuery.name
+        userID = authorID?.let { UserID(it) }
+        paginationData = paginationOptions.toPaginationData()
     }
 }

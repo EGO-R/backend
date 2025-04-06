@@ -5,14 +5,14 @@ import org.mirea.backend.repositories.video.queries.VideoIdPaginationData
 import org.mirea.backend.utils.ids.VideoID
 
 data class VideoPaginationOptions(
-    val fields: VideoSortFields,
-    val direction: SortDirection,
+    val sortField: VideoSortField = VideoSortField.ID,
+    val direction: SortDirection = SortDirection.DESC,
     val size: Int? = null,
-    val lastSelectedValue: String,
+    val lastSelectedValue: String? = null,
 ) {
-    fun toPaginationData() = when (fields) {
-        VideoSortFields.ID -> VideoIdPaginationData.create(
-            lastSelectedID = VideoID(lastSelectedValue.toLong()),
+    fun toPaginationData() = when (sortField) {
+        VideoSortField.ID -> VideoIdPaginationData.create(
+            lastSelectedID = lastSelectedValue?.let { VideoID(it.toLong()) },
         ) {
             size = this@VideoPaginationOptions.size
             sortDirection = direction
@@ -20,7 +20,7 @@ data class VideoPaginationOptions(
     }
 }
 
-enum class VideoSortFields {
+enum class VideoSortField {
     ID,
     ;
 }

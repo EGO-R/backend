@@ -18,6 +18,7 @@ class VideoMapper(
         }
         VIDEO.NAME set entity.name
         VIDEO.USER_ID set entity.userId.value
+        VIDEO.PREVIEW set entity.preview
     }
 
 }
