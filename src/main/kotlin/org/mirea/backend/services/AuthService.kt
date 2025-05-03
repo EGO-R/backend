@@ -3,6 +3,7 @@ package org.mirea.backend.services
 import kotlinx.coroutines.reactor.awaitSingle
 import org.mirea.backend.dto.auth.AuthRequest
 import org.mirea.backend.dto.auth.AuthResponse
+import org.mirea.backend.dto.toDto
 import org.mirea.backend.entities.auth.AuthEntity
 import org.mirea.backend.entities.auth.ProviderType
 import org.mirea.backend.entities.user.UserEntity
@@ -42,6 +43,7 @@ class AuthService(
         authRepository.create(authProvider)
         AuthResponse(
             token = jwtService.generate(user),
+            user = user.toDto(),
         )
     }
 
@@ -51,7 +53,10 @@ class AuthService(
         val user = userService.getByEmail(req.email)!!
 
         val token = jwtService.generate(user)
-        return AuthResponse(token)
+        return AuthResponse(
+            token = token,
+            user = user.toDto(),
+        )
     }
 
     suspend fun getByUserId(userId: UserID) = authRepository.getByUserId(userId)

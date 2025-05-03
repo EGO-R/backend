@@ -28,11 +28,7 @@ class UserAuthManager(
             throw BadCredentialsException("Bad credentials")
         }
         UsernamePasswordAuthenticationToken(
-            AppUser(
-                id = userWithAuthInfo.user.id,
-                email = userWithAuthInfo.user.email,
-                role = userWithAuthInfo.user.role,
-            ),
+            userWithAuthInfo.user,
             null,
             listOf(userWithAuthInfo.user.role),
         )
