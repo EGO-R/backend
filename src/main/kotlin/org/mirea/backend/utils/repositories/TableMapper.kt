@@ -10,14 +10,14 @@ abstract class TableMapper<E, R : Record>(
 ) {
     abstract val updateIgnoreFields: Set<TableField<R, *>>
 
-    abstract fun map(entity: E): Map<TableField<R, *>, *>
+    protected abstract fun map(entity: E): Map<TableField<R, *>, *>
 
     fun record(entity: E): R {
         val fieldsMap = map(entity)
         return setFields(fieldsMap)
     }
 
-    suspend fun updateRecord(entity: E): R {
+    fun updateRecord(entity: E): R {
         val fieldsMap = map(entity)
             .filterKeys { it !in updateIgnoreFields }
         return setFields(fieldsMap)

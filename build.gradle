@@ -25,10 +25,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     runtimeOnly 'org.postgresql:postgresql'
     jooqGenerator 'org.postgresql:postgresql'
-    jooqGenerator 'org.jooq:jooq'
-    jooqGenerator 'org.jooq:jooq-meta'
-    jooqGenerator 'org.jooq:jooq-codegen'
+    jooqGenerator 'org.jooq:jooq:3.19.8'
+    jooqGenerator 'org.jooq:jooq-meta:3.19.8'
+    jooqGenerator 'org.jooq:jooq-codegen:3.19.8'
     implementation 'org.liquibase:liquibase-core'
+
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+    implementation("com.nimbusds:nimbus-jose-jwt") // ???
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 
     // s3
     implementation("software.amazon.awssdk:aws-sdk-java:2.29.33")
@@ -38,7 +47,10 @@ dependencies {
 //    // web
 //    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
 //    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation('org.springframework.boot:spring-boot-starter-web')
+//    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     // kotlin
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
@@ -57,15 +69,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 }
 
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:3.2.4'
-    }
-    dependencies {
-        dependency 'org.jooq:jooq-codegen:3.19.8'
-        dependency 'org.jooq:jooq-meta:3.19.8'
-        dependency 'org.jooq:jooq:3.19.8'
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.fork = true
+    options.forkOptions.jvmArgs += ['-Xmx2048m']
 }
 
 kotlin {
@@ -82,13 +88,14 @@ jooq {
     version = '3.19.8'
     configurations {
         main {
+            generateSchemaSourceOnCompilation = false
             generationTool {
                 logging = org.jooq.meta.jaxb.Logging.INFO
                 jdbc {
                     driver = 'org.postgresql.Driver'
-                    url = 'jdbc:postgresql://localhost:5432/alexandrina_rksp'
+                    url = 'jdbc:postgresql://localhost:5432/alexandrina'
                     user = 'postgres'
-                    password = 'Egor2004'
+                    password = 'postgres'
                 }
                 generator {
                     name = 'org.jooq.codegen.JavaGenerator'

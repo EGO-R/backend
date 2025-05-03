@@ -7,7 +7,7 @@ import org.mirea.backend.utils.ids.VideoID
 
 data class VideoSearchQuery(
     val name: String? = null,
-    val authorID: Int? = null,
+    val authorID: Long? = null,
     val paginationOptions: VideoPaginationOptions = VideoPaginationOptions(),
 ) {
     fun toRepositoryQuery() = VideoRepositorySearchQuery.create {

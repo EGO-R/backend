@@ -31,6 +31,7 @@ import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import org.mirea.backend.jooq.generated.Keys;
 import org.mirea.backend.jooq.generated.Public;
+import org.mirea.backend.jooq.generated.tables.AuthProvider.AuthProviderPath;
 import org.mirea.backend.jooq.generated.tables.Video.VideoPath;
 import org.mirea.backend.jooq.generated.tables.records.ClientsRecord;
 
@@ -59,7 +60,7 @@ public class Clients extends TableImpl<ClientsRecord> {
     /**
      * The column <code>public.clients.id</code>.
      */
-    public final TableField<ClientsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<ClientsRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.clients.email</code>.
@@ -70,6 +71,11 @@ public class Clients extends TableImpl<ClientsRecord> {
      * The column <code>public.clients.name</code>.
      */
     public final TableField<ClientsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(65).nullable(false), this, "");
+
+    /**
+     * The column <code>public.clients.role</code>.
+     */
+    public final TableField<ClientsRecord, Short> ROLE = createField(DSL.name("role"), SQLDataType.SMALLINT.nullable(false).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.SMALLINT)), this, "");
 
     private Clients(Name alias, Table<ClientsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -139,8 +145,8 @@ public class Clients extends TableImpl<ClientsRecord> {
     }
 
     @Override
-    public Identity<ClientsRecord, Integer> getIdentity() {
-        return (Identity<ClientsRecord, Integer>) super.getIdentity();
+    public Identity<ClientsRecord, Long> getIdentity() {
+        return (Identity<ClientsRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -151,6 +157,19 @@ public class Clients extends TableImpl<ClientsRecord> {
     @Override
     public List<UniqueKey<ClientsRecord>> getUniqueKeys() {
         return Arrays.asList(Keys.CLIENTS_EMAIL_KEY);
+    }
+
+    private transient AuthProviderPath _authProvider;
+
+    /**
+     * Get the implicit to-many join path to the
+     * <code>public.auth_provider</code> table
+     */
+    public AuthProviderPath authProvider() {
+        if (_authProvider == null)
+            _authProvider = new AuthProviderPath(this, null, Keys.AUTH_PROVIDER__AUTH_PROVIDER_USER_ID_FKEY.getInverseKey());
+
+        return _authProvider;
     }
 
     private transient VideoPath _video;

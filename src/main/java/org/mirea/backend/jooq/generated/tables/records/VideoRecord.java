@@ -46,31 +46,45 @@ public class VideoRecord extends UpdatableRecordImpl<VideoRecord> {
     }
 
     /**
+     * Setter for <code>public.video.video_url</code>.
+     */
+    public void setVideoUrl(String value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>public.video.video_url</code>.
+     */
+    public String getVideoUrl() {
+        return (String) get(2);
+    }
+
+    /**
      * Setter for <code>public.video.user_id</code>.
      */
-    public void setUserId(Integer value) {
-        set(2, value);
+    public void setUserId(Long value) {
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.video.user_id</code>.
      */
-    public Integer getUserId() {
-        return (Integer) get(2);
+    public Long getUserId() {
+        return (Long) get(3);
     }
 
     /**
      * Setter for <code>public.video.preview</code>.
      */
     public void setPreview(String value) {
-        set(3, value);
+        set(4, value);
     }
 
     /**
      * Getter for <code>public.video.preview</code>.
      */
     public String getPreview() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     // -------------------------------------------------------------------------
@@ -96,11 +110,12 @@ public class VideoRecord extends UpdatableRecordImpl<VideoRecord> {
     /**
      * Create a detached, initialised VideoRecord
      */
-    public VideoRecord(Long id, String name, Integer userId, String preview) {
+    public VideoRecord(Long id, String name, String videoUrl, Long userId, String preview) {
         super(Video.VIDEO);
 
         setId(id);
         setName(name);
+        setVideoUrl(videoUrl);
         setUserId(userId);
         setPreview(preview);
         resetChangedOnNotNull();

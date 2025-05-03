@@ -6,7 +6,9 @@ import org.mirea.backend.jooq.generated.Tables.VIDEO
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord
 import org.mirea.backend.utils.ids.VideoID
 import org.mirea.backend.utils.repositories.TableMapper
+import org.springframework.stereotype.Component
 
+@Component
 class VideoMapper(
     dsl: DSLContext,
 ) : TableMapper<VideoEntity, VideoRecord>(dsl) {
@@ -19,6 +21,6 @@ class VideoMapper(
         VIDEO.NAME set entity.name
         VIDEO.USER_ID set entity.userId.value
         VIDEO.PREVIEW set entity.preview
+        VIDEO.VIDEO_URL set entity.videoUrl
     }
-
 }

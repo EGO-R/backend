@@ -67,9 +67,14 @@ public class Video extends TableImpl<VideoRecord> {
     public final TableField<VideoRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(256).nullable(false), this, "");
 
     /**
+     * The column <code>public.video.video_url</code>.
+     */
+    public final TableField<VideoRecord, String> VIDEO_URL = createField(DSL.name("video_url"), SQLDataType.VARCHAR(256).nullable(false), this, "");
+
+    /**
      * The column <code>public.video.user_id</code>.
      */
-    public final TableField<VideoRecord, Integer> USER_ID = createField(DSL.name("user_id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VideoRecord, Long> USER_ID = createField(DSL.name("user_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.video.preview</code>.

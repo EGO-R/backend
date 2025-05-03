@@ -1,9 +1,9 @@
 package org.mirea.backend.utils.ids
 
 @JvmInline
-value class UserID(val value: Int) {
+value class UserID(val value: Long) {
     companion object {
-        val emptyId = 0
+        val emptyId = 0L
 
         val EMPTY = UserID(emptyId)
     }

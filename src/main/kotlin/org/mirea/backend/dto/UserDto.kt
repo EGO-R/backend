@@ -1,6 +1,6 @@
 package org.mirea.backend.dto
 
-import org.mirea.backend.entities.UserEntity
+import org.mirea.backend.entities.user.UserEntity
 import org.mirea.backend.utils.ids.UserID
 
 data class UserDto(
@@ -10,10 +10,10 @@ data class UserDto(
 )
 
 fun UserEntity.update(dto: UserDto) = this.copy(
-    name = dto.name,
+    displayName = dto.name,
     email = dto.email,
 )
 
 fun UserEntity.toDto() = UserDto(
-    id, email, name
+    id, email, displayName
 )

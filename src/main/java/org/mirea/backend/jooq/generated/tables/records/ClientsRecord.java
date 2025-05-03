@@ -20,15 +20,15 @@ public class ClientsRecord extends UpdatableRecordImpl<ClientsRecord> {
     /**
      * Setter for <code>public.clients.id</code>.
      */
-    public void setId(Integer value) {
+    public void setId(Long value) {
         set(0, value);
     }
 
     /**
      * Getter for <code>public.clients.id</code>.
      */
-    public Integer getId() {
-        return (Integer) get(0);
+    public Long getId() {
+        return (Long) get(0);
     }
 
     /**
@@ -59,12 +59,26 @@ public class ClientsRecord extends UpdatableRecordImpl<ClientsRecord> {
         return (String) get(2);
     }
 
+    /**
+     * Setter for <code>public.clients.role</code>.
+     */
+    public void setRole(Short value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>public.clients.role</code>.
+     */
+    public Short getRole() {
+        return (Short) get(3);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
 
     @Override
-    public Record1<Integer> key() {
+    public Record1<Long> key() {
         return (Record1) super.key();
     }
 
@@ -82,12 +96,13 @@ public class ClientsRecord extends UpdatableRecordImpl<ClientsRecord> {
     /**
      * Create a detached, initialised ClientsRecord
      */
-    public ClientsRecord(Integer id, String email, String name) {
+    public ClientsRecord(Long id, String email, String name, Short role) {
         super(Clients.CLIENTS);
 
         setId(id);
         setEmail(email);
         setName(name);
+        setRole(role);
         resetChangedOnNotNull();
     }
 }

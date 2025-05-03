@@ -2,16 +2,14 @@ package org.mirea.backend.repositories
 
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
-import org.jooq.DSLContext
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.mirea.backend.RepositoryTest
-import org.mirea.backend.entities.UserEntity
+import org.mirea.backend.entities.user.UserEntity
 import org.mirea.backend.repositories.user.UserRepository
 import org.mirea.backend.repositories.user.UserRepositorySearchQuery
 import org.mirea.backend.utils.ids.UserID
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.jdbc.Sql
 
 @Sql(scripts = ["/sql/users/data.sql"])
@@ -25,7 +23,7 @@ class UserRepositoryTest : RepositoryTest() {
         fun getById() {
             val expected = UserEntity(
                 id = UserID(1),
-                name = "test1",
+                displayName = "test1",
                 email = "test1@mail.com",
             )
             val actual = runBlocking {
@@ -44,7 +42,7 @@ class UserRepositoryTest : RepositoryTest() {
                 UserEntity(
                     id = UserID(2),
                     email = "test2@mail.com",
-                    name = "test2",
+                    displayName = "test2",
                 ),
             )
 

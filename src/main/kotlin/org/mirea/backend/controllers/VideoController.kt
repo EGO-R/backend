@@ -1,5 +1,7 @@
 package org.mirea.backend.controllers
 
+import org.mirea.backend.dto.UploadUrlDto
+import org.mirea.backend.dto.VideoCreateDto
 import org.mirea.backend.dto.VideoDto
 import org.mirea.backend.dto.VideoUpdateDto
 import org.mirea.backend.services.video.VideoSearchQuery
@@ -20,8 +22,13 @@ class VideoController(
         return videoService.search(query)
     }
 
+    @GetMapping("/{id}")
+    suspend fun getById(@PathVariable id: VideoID): VideoDto {
+        return videoService.getById(id)
+    }
+
     @PostMapping("/create")
-    suspend fun create(@ModelAttribute dto: VideoUpdateDto): VideoDto {
+    suspend fun create(@ModelAttribute dto: VideoCreateDto): VideoDto {
         return videoService.create(dto)
     }
 
@@ -30,11 +37,13 @@ class VideoController(
         return videoService.update(id, dto)
     }
 
-    @GetMapping("/check_queue")
-    suspend fun checkQueue() {
-        while (queue.isNotEmpty()) {
-            val dto = queue.take()
-            println("Queue element size: ${dto.videoFile?.size}")
-        }
+    @GetMapping("/upload")
+    suspend fun getUploadUrl(): UploadUrlDto {
+        return videoService.getUploadUrl()
+    }
+
+    @DeleteMapping("/{id}")
+    suspend fun deleteById(@PathVariable id: VideoID) {
+        videoService.deleteById(id)
     }
 }

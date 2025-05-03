@@ -9,9 +9,11 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
+import org.mirea.backend.jooq.generated.tables.AuthProvider;
 import org.mirea.backend.jooq.generated.tables.Clients;
 import org.mirea.backend.jooq.generated.tables.Databasechangeloglock;
 import org.mirea.backend.jooq.generated.tables.Video;
+import org.mirea.backend.jooq.generated.tables.records.AuthProviderRecord;
 import org.mirea.backend.jooq.generated.tables.records.ClientsRecord;
 import org.mirea.backend.jooq.generated.tables.records.DatabasechangeloglockRecord;
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord;
@@ -28,6 +30,7 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<AuthProviderRecord> AUTH_PROVIDER_PKEY = Internal.createUniqueKey(AuthProvider.AUTH_PROVIDER, DSL.name("auth_provider_pkey"), new TableField[] { AuthProvider.AUTH_PROVIDER.ID }, true);
     public static final UniqueKey<ClientsRecord> CLIENTS_EMAIL_KEY = Internal.createUniqueKey(Clients.CLIENTS, DSL.name("clients_email_key"), new TableField[] { Clients.CLIENTS.EMAIL }, true);
     public static final UniqueKey<ClientsRecord> CLIENTS_PKEY = Internal.createUniqueKey(Clients.CLIENTS, DSL.name("clients_pkey"), new TableField[] { Clients.CLIENTS.ID }, true);
     public static final UniqueKey<DatabasechangeloglockRecord> DATABASECHANGELOGLOCK_PKEY = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("databasechangeloglock_pkey"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
@@ -37,5 +40,6 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<AuthProviderRecord, ClientsRecord> AUTH_PROVIDER__AUTH_PROVIDER_USER_ID_FKEY = Internal.createForeignKey(AuthProvider.AUTH_PROVIDER, DSL.name("auth_provider_user_id_fkey"), new TableField[] { AuthProvider.AUTH_PROVIDER.USER_ID }, Keys.CLIENTS_PKEY, new TableField[] { Clients.CLIENTS.ID }, true);
     public static final ForeignKey<VideoRecord, ClientsRecord> VIDEO__VIDEO_USER_ID_FKEY = Internal.createForeignKey(Video.VIDEO, DSL.name("video_user_id_fkey"), new TableField[] { Video.VIDEO.USER_ID }, Keys.CLIENTS_PKEY, new TableField[] { Clients.CLIENTS.ID }, true);
 }

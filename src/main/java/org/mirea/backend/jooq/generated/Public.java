@@ -10,6 +10,7 @@ import java.util.List;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
+import org.mirea.backend.jooq.generated.tables.AuthProvider;
 import org.mirea.backend.jooq.generated.tables.Clients;
 import org.mirea.backend.jooq.generated.tables.Databasechangelog;
 import org.mirea.backend.jooq.generated.tables.Databasechangeloglock;
@@ -28,6 +29,11 @@ public class Public extends SchemaImpl {
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>public.auth_provider</code>.
+     */
+    public final AuthProvider AUTH_PROVIDER = AuthProvider.AUTH_PROVIDER;
 
     /**
      * The table <code>public.clients</code>.
@@ -65,6 +71,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            AuthProvider.AUTH_PROVIDER,
             Clients.CLIENTS,
             Databasechangelog.DATABASECHANGELOG,
             Databasechangeloglock.DATABASECHANGELOGLOCK,

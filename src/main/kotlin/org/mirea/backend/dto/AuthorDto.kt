@@ -1,13 +1,13 @@
 package org.mirea.backend.dto
 
-import org.mirea.backend.entities.UserEntity
+import org.mirea.backend.entities.user.UserEntity
 
 data class AuthorDto(
-    val id: Int,
+    val id: Long,
     val name: String,
 )
 
 fun UserEntity.toAuthorDto() = AuthorDto(
     id = id.value,
-    name = name,
+    name = displayName,
 )

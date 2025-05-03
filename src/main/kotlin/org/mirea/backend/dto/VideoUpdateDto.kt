@@ -7,13 +7,12 @@ import org.springframework.web.multipart.MultipartFile
 
 data class VideoUpdateDto(
     val name: String,
-    val preview: String,
-    val videoFile: MultipartFile? = null,
 ) {
-    fun toEntity(id: VideoID, userID: UserID) = VideoEntity(
-        id = id,
+    fun toEntity(entity: VideoEntity) = VideoEntity(
+        id = entity.id,
         name = name,
-        userId = userID,
-        preview = preview,
+        userId = entity.userId,
+        preview = entity.preview,
+        videoUrl = entity.videoUrl,
     )
 }

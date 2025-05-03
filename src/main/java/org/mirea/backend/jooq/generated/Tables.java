@@ -4,6 +4,7 @@
 package org.mirea.backend.jooq.generated;
 
 
+import org.mirea.backend.jooq.generated.tables.AuthProvider;
 import org.mirea.backend.jooq.generated.tables.Clients;
 import org.mirea.backend.jooq.generated.tables.Databasechangelog;
 import org.mirea.backend.jooq.generated.tables.Databasechangeloglock;
@@ -15,6 +16,11 @@ import org.mirea.backend.jooq.generated.tables.Video;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>public.auth_provider</code>.
+     */
+    public static final AuthProvider AUTH_PROVIDER = AuthProvider.AUTH_PROVIDER;
 
     /**
      * The table <code>public.clients</code>.
