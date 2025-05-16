@@ -3,8 +3,8 @@ package org.mirea.backend.repositories.video.queries
 import org.jooq.TableField
 import org.mirea.backend.jooq.generated.Tables.VIDEO
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord
-import org.mirea.backend.repositories.shared.PaginationData
-import org.mirea.backend.repositories.shared.SortDirection
+import org.mirea.backend.repositories.PaginationData
+import org.mirea.backend.repositories.SortDirection
 import org.mirea.backend.utils.ids.VideoID
 
 data class VideoIdPaginationData internal constructor(
@@ -31,5 +31,4 @@ data class VideoIdPaginationData internal constructor(
             )
         }
     }
-
 }

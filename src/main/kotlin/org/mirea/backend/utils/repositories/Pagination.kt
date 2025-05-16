@@ -1,7 +1,7 @@
 package org.mirea.backend.utils.repositories
 
 import org.jooq.*
-import org.mirea.backend.repositories.shared.PaginationData
+import org.mirea.backend.repositories.PaginationData
 
 const val DEFAULT_PAGE_SIZE = 20
 

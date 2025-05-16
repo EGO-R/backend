@@ -1,4 +1,4 @@
-package org.mirea.backend.dto
+package org.mirea.backend.dto.user
 
 import org.mirea.backend.entities.user.UserEntity
 import org.mirea.backend.utils.ids.UserID

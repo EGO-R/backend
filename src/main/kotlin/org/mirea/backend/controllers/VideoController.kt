@@ -1,9 +1,9 @@
 package org.mirea.backend.controllers
 
-import org.mirea.backend.dto.UploadUrlDto
-import org.mirea.backend.dto.VideoCreateDto
-import org.mirea.backend.dto.VideoDto
-import org.mirea.backend.dto.VideoUpdateDto
+import org.mirea.backend.dto.s3.UploadUrlDto
+import org.mirea.backend.dto.video.VideoCreateDto
+import org.mirea.backend.dto.video.VideoDto
+import org.mirea.backend.dto.video.VideoUpdateDto
 import org.mirea.backend.services.video.VideoSearchQuery
 import org.mirea.backend.services.video.VideoService
 import org.mirea.backend.utils.ids.VideoID
@@ -15,10 +15,9 @@ import java.util.concurrent.BlockingQueue
 @RequestMapping("/api/videos")
 class VideoController(
     private val videoService: VideoService,
-    private val queue: BlockingQueue<VideoUpdateDto>,
 ) {
     @GetMapping
-    suspend fun search(@RequestBody query: VideoSearchQuery = VideoSearchQuery()): List<VideoDto> {
+    suspend fun search(@ModelAttribute query: VideoSearchQuery): List<VideoDto> {
         return videoService.search(query)
     }
 

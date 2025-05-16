@@ -1,7 +1,7 @@
 package org.mirea.backend.repositories.video.queries
 
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord
-import org.mirea.backend.repositories.shared.PaginationData
+import org.mirea.backend.repositories.PaginationData
 import org.mirea.backend.utils.ids.UserID
 import org.mirea.backend.utils.ids.VideoID
 

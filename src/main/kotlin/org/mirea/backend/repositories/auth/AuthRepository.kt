@@ -59,10 +59,7 @@ class AuthRepository(
 
     suspend fun getUserWithAuthInfo(email: String, type: ProviderType): UserWithAuthInfo? = jooqScope.useDslContext { ctx ->
         ctx
-            .select(
-                AUTH_PROVIDER,
-                CLIENTS,
-            )
+            .select(userAuthMapper)
             .from(
                 CLIENTS
                     .join(AUTH_PROVIDER).on(AUTH_PROVIDER.USER_ID.eq(CLIENTS.ID))

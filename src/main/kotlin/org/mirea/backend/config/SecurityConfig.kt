@@ -1,21 +1,17 @@
 package org.mirea.backend.config
 
 import io.jsonwebtoken.security.Keys
-import kotlinx.coroutines.reactor.mono
-import org.mirea.backend.services.AuthService
-import org.mirea.backend.services.UserService
+import org.mirea.backend.config.auth.OAuth2LoginSuccessHandler
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.config.web.server.invoke
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm
@@ -38,19 +34,27 @@ class SecurityConfig {
     fun chain(
         http: ServerHttpSecurity,
         cors: CorsConfigurationSource,
-        converter: Converter<Jwt, Mono<AbstractAuthenticationToken>>
+        converter: Converter<Jwt, Mono<AbstractAuthenticationToken>>,
+        oAuth2LoginSuccessHandler: OAuth2LoginSuccessHandler
     ): SecurityWebFilterChain = http {
-        cors { configurationSource = cors }           // ← важен порядок, CORS‑фильтр выше
+        cors { configurationSource = cors }
         csrf { disable() }
-
         authorizeExchange {
-            authorize(HttpMethod.OPTIONS, "/**", permitAll)
+            authorize(
+                pathMatchers(HttpMethod.OPTIONS, "/**"),
+                permitAll,
+            )
             authorize("/api/auth/**", permitAll)
+            authorize("/login/oauth2/code/**", permitAll)
             authorize(anyExchange, authenticated)
         }
 
         oauth2ResourceServer {
             jwt { jwtAuthenticationConverter = converter }
+        }
+        
+        oauth2Login {
+            authenticationSuccessHandler = oAuth2LoginSuccessHandler
         }
     }
 
@@ -63,7 +67,7 @@ class SecurityConfig {
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 allowedHeaders = listOf("*")
                 allowCredentials = true
-                maxAge = 3600                     // кэш результата на 1 ч
+                maxAge = 3600
             })
         }
 

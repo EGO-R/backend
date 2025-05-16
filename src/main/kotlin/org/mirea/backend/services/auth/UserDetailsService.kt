@@ -1,4 +1,4 @@
-package org.mirea.backend.services
+package org.mirea.backend.services.auth
 
 import kotlinx.coroutines.runBlocking
 import org.apache.logging.log4j.LogManager

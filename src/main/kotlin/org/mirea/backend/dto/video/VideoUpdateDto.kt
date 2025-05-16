@@ -1,9 +1,6 @@
-package org.mirea.backend.dto
+package org.mirea.backend.dto.video
 
-import org.mirea.backend.entities.VideoEntity
-import org.mirea.backend.utils.ids.UserID
-import org.mirea.backend.utils.ids.VideoID
-import org.springframework.web.multipart.MultipartFile
+import org.mirea.backend.entities.video.VideoEntity
 
 data class VideoUpdateDto(
     val name: String,

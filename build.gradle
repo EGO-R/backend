@@ -23,40 +23,37 @@ dependencies {
     // db
 //    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
-    runtimeOnly 'org.postgresql:postgresql'
-    jooqGenerator 'org.postgresql:postgresql'
-    jooqGenerator 'org.jooq:jooq:3.19.8'
-    jooqGenerator 'org.jooq:jooq-meta:3.19.8'
-    jooqGenerator 'org.jooq:jooq-codegen:3.19.8'
+    runtimeOnly 'org.postgresql:postgresql:42.7.4'
+    jooqGenerator 'org.postgresql:postgresql:42.7.4'
+    jooqGenerator "org.jooq:jooq:${jooq_version}"
+    jooqGenerator "org.jooq:jooq-meta:${jooq_version}"
+    jooqGenerator "org.jooq:jooq-codegen:${jooq_version}"
     implementation 'org.liquibase:liquibase-core'
 
     // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("com.nimbusds:nimbus-jose-jwt") // ???
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+    implementation("com.nimbusds:nimbus-jose-jwt")
+    implementation "io.jsonwebtoken:jjwt-api:${jsonwebtoken_version}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jsonwebtoken_version}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jsonwebtoken_version}"
 
     // s3
-    implementation("software.amazon.awssdk:aws-sdk-java:2.29.33")
-    implementation("software.amazon.awssdk:apache-client:2.29.33")
-//    implementation 'software.amazon.awssdk:netty-nio-client:2.23.11'
-//
-//    // web
+    implementation "software.amazon.awssdk:aws-sdk-java:${awssdk_version}"
+    implementation "software.amazon.awssdk:apache-client:${awssdk_version}"
+
+    // web
 //    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
 //    implementation 'org.springframework.boot:spring-boot-starter-validation'
-//    implementation('org.springframework.boot:spring-boot-starter-web')
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
 
     // kotlin
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
 
     // tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -85,17 +82,17 @@ tasks.named('test') {
 }
 
 jooq {
-    version = '3.19.8'
+    version = "${jooq_version}"
     configurations {
         main {
             generateSchemaSourceOnCompilation = false
             generationTool {
                 logging = org.jooq.meta.jaxb.Logging.INFO
                 jdbc {
-                    driver = 'org.postgresql.Driver'
-                    url = 'jdbc:postgresql://localhost:5432/alexandrina'
-                    user = 'postgres'
-                    password = 'postgres'
+                    driver = "${jooq_generator_driver}"
+                    url = "${jooq_generator_url}"
+                    user = "${jooq_generator_user}"
+                    password = "${jooq_generator_password}"
                 }
                 generator {
                     name = 'org.jooq.codegen.JavaGenerator'

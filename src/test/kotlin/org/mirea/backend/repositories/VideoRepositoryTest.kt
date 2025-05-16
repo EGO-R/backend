@@ -5,15 +5,17 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.mirea.backend.RepositoryTest
-import org.mirea.backend.entities.VideoEntity
+import org.mirea.backend.entities.video.VideoEntity
 import org.mirea.backend.repositories.video.VideoRepository
 import org.mirea.backend.repositories.video.queries.VideoIdPaginationData
 import org.mirea.backend.repositories.video.queries.VideoRepositorySearchQuery
 import org.mirea.backend.utils.ids.UserID
 import org.mirea.backend.utils.ids.VideoID
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.jdbc.Sql
 
+@ActiveProfiles("test")
 @Sql(scripts = ["/sql/users/data.sql", "/sql/videos/data.sql"])
 class VideoRepositoryTest : RepositoryTest() {
     @Autowired
@@ -37,6 +39,8 @@ class VideoRepositoryTest : RepositoryTest() {
                     id = VideoID(1),
                     name = "test1",
                     userId = UserID(1),
+                    videoUrl = "1",
+                    preview = "1"
                 ),
             )
 
@@ -62,6 +66,8 @@ class VideoRepositoryTest : RepositoryTest() {
                     id = VideoID(2),
                     name = "test2",
                     userId = UserID(2),
+                    preview = "2",
+                    videoUrl = "2",
                 ),
             )
 
@@ -80,6 +86,8 @@ class VideoRepositoryTest : RepositoryTest() {
                 id = VideoID(2),
                 name = "test2",
                 userId = UserID(2),
+                preview = "2",
+                videoUrl = "2",
             )
 
             val actual = runBlocking {
@@ -98,12 +106,16 @@ class VideoRepositoryTest : RepositoryTest() {
                 id = VideoID.EMPTY,
                 name = "test3",
                 userId = UserID(2),
+                preview = "2",
+                videoUrl = "2",
             )
 
             val expected = VideoEntity(
                 id = VideoID(NEXT_INSERT_ID),
                 name = "test3",
                 userId = UserID(2),
+                preview = "2",
+                videoUrl = "2",
             )
 
             val actual = runBlocking {
@@ -122,12 +134,16 @@ class VideoRepositoryTest : RepositoryTest() {
                 id = VideoID(2),
                 name = "test3",
                 userId = UserID(3),
+                preview = "2",
+                videoUrl = "2",
             )
 
             val expected = VideoEntity(
                 id = VideoID(2),
                 name = "test3",
                 userId = UserID(2),
+                preview = "2",
+                videoUrl = "2",
             )
 
             val actual = runBlocking {
@@ -151,6 +167,8 @@ class VideoRepositoryTest : RepositoryTest() {
                     id = VideoID(1),
                     name = "test1",
                     userId = UserID(1),
+                    preview = "1",
+                    videoUrl = "1",
                 ),
             )
 

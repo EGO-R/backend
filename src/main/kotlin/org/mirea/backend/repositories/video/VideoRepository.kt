@@ -1,9 +1,6 @@
 package org.mirea.backend.repositories.video
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.jooq.DSLContext
-import org.mirea.backend.entities.VideoEntity
+import org.mirea.backend.entities.video.VideoEntity
 import org.mirea.backend.jooq.generated.Tables.VIDEO
 import org.mirea.backend.repositories.JooqScope
 import org.mirea.backend.repositories.video.queries.VideoRepositorySearchQuery

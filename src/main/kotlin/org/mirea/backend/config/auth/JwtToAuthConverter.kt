@@ -1,7 +1,7 @@
-package org.mirea.backend.config.jwt
+package org.mirea.backend.config.auth
 
 import kotlinx.coroutines.reactor.mono
-import org.mirea.backend.services.UserService
+import org.mirea.backend.services.user.UserService
 import org.springframework.core.convert.converter.Converter
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

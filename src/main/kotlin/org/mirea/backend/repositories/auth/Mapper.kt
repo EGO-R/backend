@@ -3,6 +3,7 @@ package org.mirea.backend.repositories.auth
 import org.jooq.DSLContext
 import org.mirea.backend.entities.auth.AuthEntity
 import org.mirea.backend.jooq.generated.Tables.AUTH_PROVIDER
+import org.mirea.backend.jooq.generated.Tables.CLIENTS
 import org.mirea.backend.jooq.generated.tables.records.AuthProviderRecord
 import org.mirea.backend.utils.ids.AuthID
 import org.mirea.backend.utils.repositories.TableMapper
@@ -24,3 +25,15 @@ class AuthMapper(
         AUTH_PROVIDER.CREDENTIALS set entity.credentials
     }
 }
+
+internal val userAuthMapper = listOf(
+    AUTH_PROVIDER.ID,
+    AUTH_PROVIDER.USER_ID,
+    AUTH_PROVIDER.PROVIDER_TYPE,
+    AUTH_PROVIDER.PROVIDER_USER_ID,
+    AUTH_PROVIDER.CREDENTIALS,
+    CLIENTS.ID,
+    CLIENTS.EMAIL,
+    CLIENTS.NAME,
+    CLIENTS.ROLE,
+)

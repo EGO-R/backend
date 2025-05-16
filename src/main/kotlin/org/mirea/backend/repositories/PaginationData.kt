@@ -1,4 +1,4 @@
-package org.mirea.backend.repositories.shared
+package org.mirea.backend.repositories
 
 import org.jooq.Record
 import org.jooq.TableField

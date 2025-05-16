@@ -1,4 +1,4 @@
-package org.mirea.backend.entities
+package org.mirea.backend.entities.video
 
 import org.mirea.backend.utils.ids.UserID
 import org.mirea.backend.utils.ids.VideoID

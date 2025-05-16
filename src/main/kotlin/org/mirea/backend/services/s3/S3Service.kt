@@ -1,4 +1,4 @@
-package org.mirea.backend.services
+package org.mirea.backend.services.s3
 
 import kotlinx.coroutines.*
 import org.mirea.backend.utils.ids.UserID

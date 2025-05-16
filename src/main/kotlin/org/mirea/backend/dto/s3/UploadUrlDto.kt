@@ -1,4 +1,4 @@
-package org.mirea.backend.dto
+package org.mirea.backend.dto.s3
 
 data class UploadUrlDto(
     val url: String,

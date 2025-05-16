@@ -12,10 +12,12 @@ import org.jooq.impl.Internal;
 import org.mirea.backend.jooq.generated.tables.AuthProvider;
 import org.mirea.backend.jooq.generated.tables.Clients;
 import org.mirea.backend.jooq.generated.tables.Databasechangeloglock;
+import org.mirea.backend.jooq.generated.tables.RefreshToken;
 import org.mirea.backend.jooq.generated.tables.Video;
 import org.mirea.backend.jooq.generated.tables.records.AuthProviderRecord;
 import org.mirea.backend.jooq.generated.tables.records.ClientsRecord;
 import org.mirea.backend.jooq.generated.tables.records.DatabasechangeloglockRecord;
+import org.mirea.backend.jooq.generated.tables.records.RefreshTokenRecord;
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord;
 
 
@@ -34,6 +36,7 @@ public class Keys {
     public static final UniqueKey<ClientsRecord> CLIENTS_EMAIL_KEY = Internal.createUniqueKey(Clients.CLIENTS, DSL.name("clients_email_key"), new TableField[] { Clients.CLIENTS.EMAIL }, true);
     public static final UniqueKey<ClientsRecord> CLIENTS_PKEY = Internal.createUniqueKey(Clients.CLIENTS, DSL.name("clients_pkey"), new TableField[] { Clients.CLIENTS.ID }, true);
     public static final UniqueKey<DatabasechangeloglockRecord> DATABASECHANGELOGLOCK_PKEY = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("databasechangeloglock_pkey"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
+    public static final UniqueKey<RefreshTokenRecord> REFRESH_TOKEN_PKEY = Internal.createUniqueKey(RefreshToken.REFRESH_TOKEN, DSL.name("refresh_token_pkey"), new TableField[] { RefreshToken.REFRESH_TOKEN.USER_ID }, true);
     public static final UniqueKey<VideoRecord> VIDEO_PKEY = Internal.createUniqueKey(Video.VIDEO, DSL.name("video_pkey"), new TableField[] { Video.VIDEO.ID }, true);
 
     // -------------------------------------------------------------------------
@@ -41,5 +44,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final ForeignKey<AuthProviderRecord, ClientsRecord> AUTH_PROVIDER__AUTH_PROVIDER_USER_ID_FKEY = Internal.createForeignKey(AuthProvider.AUTH_PROVIDER, DSL.name("auth_provider_user_id_fkey"), new TableField[] { AuthProvider.AUTH_PROVIDER.USER_ID }, Keys.CLIENTS_PKEY, new TableField[] { Clients.CLIENTS.ID }, true);
+    public static final ForeignKey<RefreshTokenRecord, ClientsRecord> REFRESH_TOKEN__REFRESH_TOKEN_USER_ID_FKEY = Internal.createForeignKey(RefreshToken.REFRESH_TOKEN, DSL.name("refresh_token_user_id_fkey"), new TableField[] { RefreshToken.REFRESH_TOKEN.USER_ID }, Keys.CLIENTS_PKEY, new TableField[] { Clients.CLIENTS.ID }, true);
     public static final ForeignKey<VideoRecord, ClientsRecord> VIDEO__VIDEO_USER_ID_FKEY = Internal.createForeignKey(Video.VIDEO, DSL.name("video_user_id_fkey"), new TableField[] { Video.VIDEO.USER_ID }, Keys.CLIENTS_PKEY, new TableField[] { Clients.CLIENTS.ID }, true);
 }

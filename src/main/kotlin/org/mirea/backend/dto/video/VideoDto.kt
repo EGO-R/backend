@@ -1,7 +1,7 @@
-package org.mirea.backend.dto
+package org.mirea.backend.dto.video
 
 import org.mirea.backend.entities.user.UserEntity
-import org.mirea.backend.entities.VideoEntity
+import org.mirea.backend.entities.video.VideoEntity
 
 data class VideoDto(
     val id: Long,

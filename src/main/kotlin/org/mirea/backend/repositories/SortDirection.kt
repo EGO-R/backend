@@ -1,4 +1,4 @@
-package org.mirea.backend.repositories.shared
+package org.mirea.backend.repositories
 
 enum class SortDirection {
     ASC,

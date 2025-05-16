@@ -2,6 +2,7 @@ package org.mirea.backend.entities.auth
 
 enum class ProviderType(val value: Int) {
     PASSWORD(0),
+    GOOGLE(1),
     ;
 
     companion object {

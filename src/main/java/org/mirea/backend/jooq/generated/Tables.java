@@ -8,6 +8,7 @@ import org.mirea.backend.jooq.generated.tables.AuthProvider;
 import org.mirea.backend.jooq.generated.tables.Clients;
 import org.mirea.backend.jooq.generated.tables.Databasechangelog;
 import org.mirea.backend.jooq.generated.tables.Databasechangeloglock;
+import org.mirea.backend.jooq.generated.tables.RefreshToken;
 import org.mirea.backend.jooq.generated.tables.Video;
 
 
@@ -36,6 +37,11 @@ public class Tables {
      * The table <code>public.databasechangeloglock</code>.
      */
     public static final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
+
+    /**
+     * The table <code>public.refresh_token</code>.
+     */
+    public static final RefreshToken REFRESH_TOKEN = RefreshToken.REFRESH_TOKEN;
 
     /**
      * The table <code>public.video</code>.

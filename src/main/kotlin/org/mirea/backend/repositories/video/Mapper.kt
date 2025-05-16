@@ -1,7 +1,7 @@
 package org.mirea.backend.repositories.video
 
 import org.jooq.DSLContext
-import org.mirea.backend.entities.VideoEntity
+import org.mirea.backend.entities.video.VideoEntity
 import org.mirea.backend.jooq.generated.Tables.VIDEO
 import org.mirea.backend.jooq.generated.tables.records.VideoRecord
 import org.mirea.backend.utils.ids.VideoID

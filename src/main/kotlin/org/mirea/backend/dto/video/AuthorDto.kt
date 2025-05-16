@@ -1,4 +1,4 @@
-package org.mirea.backend.dto
+package org.mirea.backend.dto.video
 
 import org.mirea.backend.entities.user.UserEntity
 

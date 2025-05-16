@@ -32,6 +32,7 @@ import org.jooq.impl.TableImpl;
 import org.mirea.backend.jooq.generated.Keys;
 import org.mirea.backend.jooq.generated.Public;
 import org.mirea.backend.jooq.generated.tables.AuthProvider.AuthProviderPath;
+import org.mirea.backend.jooq.generated.tables.RefreshToken.RefreshTokenPath;
 import org.mirea.backend.jooq.generated.tables.Video.VideoPath;
 import org.mirea.backend.jooq.generated.tables.records.ClientsRecord;
 
@@ -170,6 +171,19 @@ public class Clients extends TableImpl<ClientsRecord> {
             _authProvider = new AuthProviderPath(this, null, Keys.AUTH_PROVIDER__AUTH_PROVIDER_USER_ID_FKEY.getInverseKey());
 
         return _authProvider;
+    }
+
+    private transient RefreshTokenPath _refreshToken;
+
+    /**
+     * Get the implicit to-many join path to the
+     * <code>public.refresh_token</code> table
+     */
+    public RefreshTokenPath refreshToken() {
+        if (_refreshToken == null)
+            _refreshToken = new RefreshTokenPath(this, null, Keys.REFRESH_TOKEN__REFRESH_TOKEN_USER_ID_FKEY.getInverseKey());
+
+        return _refreshToken;
     }
 
     private transient VideoPath _video;

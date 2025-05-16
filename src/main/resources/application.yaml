@@ -14,6 +14,14 @@ spring:
         jwt:
           # вместо JWK‑url используем local secret
           secret-key: ${JWT_SECRET:change-me-supersecret}
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
 jwt:
   secret: ${JWT_SECRET:change-me-supersecret}
 #  servlet:
@@ -30,3 +38,5 @@ s3:
   endpoint: ${S3_ENDPOINT}
   bucket: ${S3_BUCKET}
   temp-bucket: ${S3_BUCKET_TEMP}
+server:
+  port: ${PORT:8080}

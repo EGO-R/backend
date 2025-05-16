@@ -1,7 +1,7 @@
-package org.mirea.backend.services
+package org.mirea.backend.services.user
 
-import org.mirea.backend.dto.UserDto
-import org.mirea.backend.dto.toDto
+import org.mirea.backend.dto.user.UserDto
+import org.mirea.backend.dto.user.toDto
 import org.mirea.backend.entities.user.UserEntity
 import org.mirea.backend.repositories.user.UserRepository
 import org.mirea.backend.repositories.user.UserRepositorySearchQuery

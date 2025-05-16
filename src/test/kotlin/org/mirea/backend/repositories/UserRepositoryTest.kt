@@ -10,8 +10,10 @@ import org.mirea.backend.repositories.user.UserRepository
 import org.mirea.backend.repositories.user.UserRepositorySearchQuery
 import org.mirea.backend.utils.ids.UserID
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.jdbc.Sql
 
+@ActiveProfiles("test")
 @Sql(scripts = ["/sql/users/data.sql"])
 class UserRepositoryTest : RepositoryTest() {
     @Autowired

@@ -1,7 +1,6 @@
-package org.mirea.backend.config
+package org.mirea.backend.config.auth
 
 import kotlinx.coroutines.reactor.mono
-import org.mirea.backend.config.jwt.AppUser
 import org.mirea.backend.entities.auth.ProviderType
 import org.mirea.backend.repositories.auth.AuthRepository
 import org.springframework.security.authentication.BadCredentialsException
